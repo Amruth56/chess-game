@@ -6,6 +6,9 @@ const path = require("path");
 const app = express(); //  for routing part and middleware
 const server = http.createServer(app); // http server should be based on express server
 
+// socket.emit() sends a message only to the specific client that triggered the event (i.e., the current socket connection).
+// io.emit() sends a message to all connected clients (broadcasts to everyone).
+
 const io = socket(server);
 const chess = new Chess();
 let players = {};
@@ -38,6 +41,28 @@ io.on("connection", (socket) => {
       delete players.black;
     }
   });
+
+  socket.on('move', (move)=> {
+    try{
+        if(chess.turn()==="w" && socket.id !== players.white) return
+        if(chess.turn() ==="b" && socket.id !==players.black) return
+
+        const result = chess.move(move)
+        if(result){
+            currentPlayer = chess.turn() === "w" ? "W" : "B"
+            io.emit('move', move)
+            io.emit("boardState", chess.fen())
+        } else{
+            console.log("Invalid move", move)
+            socket.emit(move, "invalid")
+        }
+    }
+    catch(err){
+        console.log(err);
+        socket(move);
+    }
+
+  })
 });
 
 server.listen(3000);
