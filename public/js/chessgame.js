@@ -13,6 +13,18 @@ const renderBoard = () => {
         row.forEach((square, squareIndex)=> {
             const squareElement=document.createElement("div")
             squareElement.classList.add("square", (rowindex+squareIndex)%2===1 ? "dark" : "light")
+
+            squareElement.dataset.row = rowindex;
+            squareElement.dataset.col = squareIndex;
+
+            if(square){
+                const pieceElement = document.createElement("div")
+                pieceElement.classList.add("piece", square.color === 'w' ? "white" : "black")
+
+                pieceElement.innerText = ""
+                pieceElement.draggable= playerRole === square.color
+            }
+
         })
     })
 }
