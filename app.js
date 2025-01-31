@@ -57,7 +57,7 @@ io.on("connection", (socket) => {
             socket.emit(move, "invalid")
         }
     }
-    catch(err){
+    catch(err){ 
         console.log(err);
         socket(move);
     }
