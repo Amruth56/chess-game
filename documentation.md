@@ -113,7 +113,7 @@ socket.on("playerRole", (role) => {
 });
 ```
 
-🎮 How to Play?
+## 🎮 How to Play?  
 Open the game in a browser (http://localhost:3000).  
 The first player to join gets White (w).  
 The second player gets Black (b).  
