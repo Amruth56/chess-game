@@ -19,7 +19,6 @@
 | **Tailwind CSS** | Used for styling the chessboard |
 | **HTML, CSS, JavaScript** | Frontend logic for UI & interactions |
 
----
 
 ## 📂 Backend - `server.js`
 The backend is built with **Express.js** and uses **Socket.io** for real-time interactions.
@@ -76,13 +75,14 @@ function resetGame() {
   chess.reset();
   io.emit("boardState", chess.fen());
 }
+```
 
 
-## Frontend  
+## 📂 Frontend  - `chessgame.js`
 
 The frontend handles drag-and-drop movement and updates the board dynamically.
-
-🔹 1️⃣ Drag-and-Drop Piece Movement
+```js
+1️⃣ Drag-and-Drop Piece Movement
 const handleMove = (source, target) => {
   const move = {
     from: `${String.fromCharCode(97 + source.col)}${8 - source.row}`,
@@ -111,7 +111,7 @@ socket.on("playerRole", (role) => {
     boardElement.classList.remove("flipped");
   }
 });
-
+```
 
 🎮 How to Play?
 Open the game in a browser (http://localhost:3000).
