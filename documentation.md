@@ -114,9 +114,9 @@ socket.on("playerRole", (role) => {
 ```
 
 🎮 How to Play?
-Open the game in a browser (http://localhost:3000).
-The first player to join gets White (w).
-The second player gets Black (b).
-Drag and drop pieces to make moves.
-The board flips for the Black player.
-If a player disconnects, the game resets.
+Open the game in a browser (http://localhost:3000).  
+The first player to join gets White (w).  
+The second player gets Black (b).  
+Drag and drop pieces to make moves.  
+The board flips for the Black player.  
+If a player disconnects, the game resets.  
