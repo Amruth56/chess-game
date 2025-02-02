@@ -73,12 +73,20 @@
   
     const handleMove = (source, target) => {
       const move = {
-        from:z`${String.fromCharCode(97+source.col)}${8-source.row}`, 
-        to:`${String.fromCharCode(97+target.col)}${8-target.row}`,
-        promotion: "q"
+        from: `${String.fromCharCode(97 + source.col)}${8 - source.row}`, 
+        to: `${String.fromCharCode(97 + target.col)}${8 - target.row}`,
+        promotion: "q", // Promote pawn if needed
+      };
+    
+      // Validate the move before sending
+      const validMove = chess.move(move);
+      if (validMove) {
+        socket.emit("move", move);
+      } else {
+        console.log("Invalid move:", move);
       }
-      socket.emit("move", move)
     };
+    
   
     const getPieceUnicode = (piece) => { 
       const unicodePieces = {
@@ -98,10 +106,17 @@
       return unicodePieces[piece.type] || ""
     };
   
-    socket.on("playerRole", (role)=> {
+    socket.on("playerRole", (role) => {
       playerRole = role;
       renderBoard();
-    })
+    
+      if (playerRole === "b") {
+        boardElement.classList.add("flipped");
+      } else {
+        boardElement.classList.remove("flipped");
+      }
+    });
+    
     socket.on("spectatorRole", ()=> {
       playerRole = null;
       renderBoard();

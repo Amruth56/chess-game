@@ -1,3 +1,5 @@
+// server side code
+
 const express = require("express");
 const socket = require("socket.io");
 const http = require("http");
@@ -26,10 +28,10 @@ io.on("connection", (socket) => {
 
   if (!players.white) {
     players.white = socket.id;
-    socket.emit("playerRole", "W");
+    socket.emit("playerRole", "w");
   } else if (!players.black) {
     players.black = socket.id;
-    socket.emit("playerRole", "B");
+    socket.emit("playerRole", "b");
   } else {
     socket.emit("spectatorRole");
   }
@@ -37,10 +39,16 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     if (socket.id === players.white) {
       delete players.white;
+      resetGame()
     } else if (socket.id === players.black) {
       delete players.black;
+      resetGame()
     }
   });
+  function resetGame() {
+    chess.reset();
+    io.emit("boardState", chess.fen());
+  }
 
   socket.on('move', (move)=> {
     try{
@@ -49,7 +57,7 @@ io.on("connection", (socket) => {
 
         const result = chess.move(move)
         if(result){
-            currentPlayer = chess.turn() === "w" ? "W" : "B"
+            currentPlayer = chess.turn() === "w" ? "w" : "b"
             io.emit('move', move)
             io.emit("boardState", chess.fen())
         } else{
