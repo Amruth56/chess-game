@@ -19,13 +19,15 @@ This is a **real-time, multiplayer chess game** built using **Node.js, Express.j
 
 ## 🛠️ Installation & Setup
 ### 1️⃣ **Clone the Repository**
-git clone https://github.com/Amruth56/chess-game
+git clone https://github.com/Amruth56/chess-game  
+
 cd chess-game
 ### 2️⃣ **Install Dependencies**
 npm install
 
 ### 3️⃣ **Run the Server**
-node server.js
+node server.js  
+
 OR use nodemon for auto-restart: npx nodemon server.js
 
 ### 4️⃣  **Open in Browser**
@@ -34,10 +36,14 @@ http://localhost:3000
 
 
 ## 🏗️ Technologies Used
-Frontend: HTML, CSS (TailwindCSS), JavaScript
-Backend: Node.js, Express.js
-Real-Time Communication: Socket.io
-Game Logic: Chess.js
+Frontend: HTML, CSS (TailwindCSS), JavaScript  
+
+Backend: Node.js, Express.js  
+
+Real-Time Communication: Socket.io  
+
+Game Logic: Chess.js  
+
 Templating Engine: EJS
 
 
